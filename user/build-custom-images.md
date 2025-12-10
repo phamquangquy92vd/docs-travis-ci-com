@@ -143,8 +143,8 @@ The **“More Options”** button and the actions menu for each custom image are
 
 Clicking the More options button provides users with the following choices:
 * **Select All** - selects all available custom images. 
-* **Set as Public** - sets the custom image as public.
-* **Set as Private** - sets the custom image as private.
+* **Set as Public** - sets the custom image as public. (In the future)
+* **Set as Private** - sets the custom image as private. (In the future)
 * **Delete** - deletes a single or multiple custom images.  
 
 Users can also use the action menu on the right side of the custom image to configure the options mentioned above. 
@@ -163,7 +163,7 @@ Storage space for custom images can be included as part of your plan subscriptio
 ### Storage allowance
 Storage is calculated based on the custom image size and the number of existing custom images. Deleting a custom image reduces the storage space allocated for it. Creating one increases it. 
 
-Admin-v2 users can use credits to include the storage add-on as part of their plan. Once logged into their Travis CI account, navigate to the Plan tab and under your current plan, click the Buy Add-ons button and select your desired add-ons. Here, users can choose the storage quantity that they need. For more information on Travis CI add-ons, see the [Storage Add-ons](/user/storage-addon/) page.  
+Admin-v2 users can use credits to include the storage add-on as part of their plan. Once logged into their Travis CI account, navigate to the Plan tab and under your current plan, click the Buy Add-ons button and select your desired add-ons. Here, users can choose the storage quantity that they need. For more information on Travis CI add-ons, see the [Storage Add-ons](/user/billing-storage-addon/) page.  
 
 Exceeding the storage limits results in additional charges; therefore, users with paid subscriptions can purchase the storage add-on using Travis CI credits. 
 
@@ -172,4 +172,4 @@ Exceeding the storage limits results in additional charges; therefore, users wit
 ### Switching Plans
 If the user decides to upgrade their plan, all add-ons attached to the plan are transferred to the new plan. 
 
-Would you like to upgrade? See our different plans [here](/user/billing-overview.md).
+Would you like to upgrade? See our different plans [here](/user/billing-overview/).
