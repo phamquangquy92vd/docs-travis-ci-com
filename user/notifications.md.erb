@@ -614,7 +614,7 @@ notifications:
 
 Once everything's set up, push a new commit and you'll get a message in the slack channel.
 
-### PR build notifications 
+### PR build notifications
 
 Turn pull request notifications off by adding `on_pull_requests: false` to the `slack` section of your `.travis.yml`:
 
@@ -693,14 +693,28 @@ Travis CI can send build notifications to your Microsoft Teams channels using Ad
 
 ### Set up MS Teams Incoming Webhook
 
-1. In your Microsoft Teams channel, click the **⋯** (More options) menu
-2. Select **Connectors** or **Workflows** (depending on your Teams version)
-3. Search for and select **Incoming Webhook**
-4. Click **Add** or **Configure**
-5. Give your webhook a name (e.g., "Travis CI")
-6. Optionally upload an image
-7. Click **Create**
-8. **Copy the webhook URL** - you'll need this for your `.travis.yml`
+> **Note:** You must be a team owner or have permissions to manage connectors. Team owners can enable connector permissions for all team members by going to **Team Settings > Member permissions > Allow members to create, update, and remove connectors**.
+
+**For team owners/admins:**
+1. In Microsoft Teams, click the **⋯** (More options) menu next to the channel name
+2. Select **Manage Channel**
+3. Go to the **Connectors** tab
+4. Click **Edit**
+
+**For team members (with connector permissions):**
+1. In Microsoft Teams, click the channel name at the top
+2. Select **Open channel details** (upper right corner)
+3. Click **Manage Channel**
+4. Go to the **Connectors** tab
+5. Click **Edit**
+
+**Once in the Connectors settings (all users):**
+1. Find **Incoming Webhook** (description: "Send data from a service to your Office 365 group in real time")
+2. Click **Add**
+3. Give your webhook a name (e.g., "Travis CI")
+4. Optionally upload an image
+5. Click **Create**
+6. **Copy the webhook URL** - you'll need this for your `.travis.yml`
 
 The webhook URL will look like:
 ```
@@ -750,8 +764,6 @@ notifications:
 ```
 {: data-file=".travis.yml"}
 
-**Note:** If you encounter issues with the `travis` CLI tool on Ruby 3.x, you can leave the URL unencrypted. The warning is informational and doesn't prevent notifications from working. However, anyone with access to your `.travis.yml` will be able to post messages to your Teams channel.
-
 ### Change notification frequency
 
 Specify when you want to receive notifications:
@@ -791,7 +803,7 @@ notifications:
 ### Notification content
 
 MS Teams notifications display:
-- Build status with color-coded indicator (✅ Passed, ❌ Failed, ❗ Errored, ⊗ Canceled)
+- Build status with color-coded indicator
 - Repository name and timestamp
 - Pull request information (when applicable)
 - Commit SHA, branch, and author
