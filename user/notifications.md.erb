@@ -687,6 +687,135 @@ You can interpolate the following variables for PR builds alongwith the variable
 - *pull_request_number*: the PR number
 - *pull_request_url*: the PR URL
 
+## Configure MS Teams notifications
+
+Travis CI can send build notifications to your Microsoft Teams channels using Adaptive Cards.
+
+### Set up MS Teams Incoming Webhook
+
+1. In your Microsoft Teams channel, click the **⋯** (More options) menu
+2. Select **Connectors** or **Workflows** (depending on your Teams version)
+3. Search for and select **Incoming Webhook**
+4. Click **Add** or **Configure**
+5. Give your webhook a name (e.g., "Travis CI")
+6. Optionally upload an image
+7. Click **Create**
+8. **Copy the webhook URL** - you'll need this for your `.travis.yml`
+
+The webhook URL will look like:
+```
+https://outlook.office.com/webhook/[guid]@[guid]/IncomingWebhook/[guid]/[guid]
+```
+
+### Basic configuration
+
+Add the webhook URL to your `.travis.yml`:
+
+```yaml
+notifications:
+  msteams:
+    rooms:
+      - https://outlook.office.com/webhook/your-webhook-url-here
+```
+{: data-file=".travis.yml"}
+
+Or for multiple channels:
+
+```yaml
+notifications:
+  msteams:
+    rooms:
+      - https://outlook.office.com/webhook/team-one-webhook
+      - https://outlook.office.com/webhook/team-two-webhook
+```
+{: data-file=".travis.yml"}
+
+### Encrypt the webhook URL (Recommended)
+
+> **Security Warning:** The webhook URL contains sensitive tokens. We highly recommend encrypting it if your `.travis.yml` is stored in a public repository.
+
+To encrypt the webhook URL:
+
+```bash
+travis encrypt "https://outlook.office.com/webhook/your-webhook-url-here" --add notifications.msteams.rooms
+```
+
+This will automatically update your `.travis.yml` to:
+
+```yaml
+notifications:
+  msteams:
+    rooms:
+      secure: "encrypted_string_here..."
+```
+{: data-file=".travis.yml"}
+
+**Note:** If you encounter issues with the `travis` CLI tool on Ruby 3.x, you can leave the URL unencrypted. The warning is informational and doesn't prevent notifications from working. However, anyone with access to your `.travis.yml` will be able to post messages to your Teams channel.
+
+### Change notification frequency
+
+Specify when you want to receive notifications:
+
+```yaml
+notifications:
+  msteams:
+    rooms:
+      - https://outlook.office.com/webhook/your-webhook-url-here
+    on_success: always # default: always
+    on_failure: always # default: always
+    on_error: always   # default: always
+    on_cancel: always  # default: always
+```
+{: data-file=".travis.yml"}
+
+Available options for each setting:
+- `always`: Send notification every time
+- `never`: Never send notifications
+- `change`: Send only when the build status changes
+
+### PR build notifications
+
+By default, MS Teams will be notified for both push builds and pull request builds.
+
+Turn pull request notifications off by adding `on_pull_requests: false`:
+
+```yaml
+notifications:
+  msteams:
+    rooms:
+      - https://outlook.office.com/webhook/your-webhook-url-here
+    on_pull_requests: false
+```
+{: data-file=".travis.yml"}
+
+### Notification content
+
+MS Teams notifications display:
+- Build status with color-coded indicator (✅ Passed, ❌ Failed, ❗ Errored, ⊗ Canceled)
+- Repository name and timestamp
+- Pull request information (when applicable)
+- Commit SHA, branch, and author
+- Commit message
+- Action buttons linking to the build details on Travis CI and code changes on GitHub
+
+### Multiple configurations example
+
+You can send different notifications to different channels based on build results:
+
+```yaml
+notifications:
+  msteams:
+    - rooms:
+        - https://outlook.office.com/webhook/failures-channel
+      on_success: never
+      on_failure: always
+    - rooms:
+        - https://outlook.office.com/webhook/all-builds-channel
+      on_success: always
+      on_failure: always
+```
+{: data-file=".travis.yml"}
+
 ## Configure Webhook notifications
 
 You can define webhooks to be notified about build results:
