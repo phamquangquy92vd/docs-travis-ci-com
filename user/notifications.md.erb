@@ -810,7 +810,7 @@ Add the workflow URL to your `.travis.yml` with the `msteams: true` flag to enab
 notifications:
   webhooks:
     urls:
-      - url: https://prod-xx.eastus.logic.azure.com:443/workflows/.../invoke?...
+      - url: https://default[environment].api.powerplatform.com:443/powerautomate/automations/direct/workflows/[workflow-id]/triggers/manual/paths/invoke?...
         msteams: true
 ```
 {: data-file=".travis.yml"}
@@ -851,7 +851,7 @@ Traditional webhooks (without the `msteams` flag) will receive the standard payl
 To encrypt the webhook URL using Travis CLI:
 
 ```bash
-travis encrypt "url: https://prod-xx.workflow.url/invoke?..., msteams: true" --add notifications.webhooks.urls
+travis encrypt "url: https://default[environment].api.powerplatform.com:443/powerautomate/automations/direct/workflows/[workflow-id]/triggers/manual/paths/invoke?..., msteams: true" --add notifications.webhooks.urls
 ```
 
 ### Change notification frequency
@@ -862,7 +862,7 @@ Specify when you want to receive notifications:
 notifications:
   webhooks:
     urls:
-      - url: https://prod-xx.workflow.url/invoke?...
+      - url: https://default[environment].api.powerplatform.com:443/powerautomate/automations/direct/workflows/[workflow-id]/triggers/manual/paths/invoke?...
         msteams: true
     on_success: always # default: always
     on_failure: always # default: always
@@ -886,7 +886,7 @@ Turn pull request notifications off by adding `on_pull_requests: false`:
 notifications:
   webhooks:
     urls:
-      - url: https://prod-xx.workflow.url/invoke?...
+      - url: https://default[environment].api.powerplatform.com:443/powerautomate/automations/direct/workflows/[workflow-id]/triggers/manual/paths/invoke?...
         msteams: true
     on_pull_requests: false
 ```
