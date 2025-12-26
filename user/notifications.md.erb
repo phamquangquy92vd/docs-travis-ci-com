@@ -876,22 +876,6 @@ Available options for each setting:
 - `never`: Never send notifications
 - `change`: Send only when the build status changes
 
-### PR build notifications
-
-By default, MS Teams will be notified for both push builds and pull request builds.
-
-Turn pull request notifications off by adding `on_pull_requests: false`:
-
-```yaml
-notifications:
-  webhooks:
-    urls:
-      - url: https://default[environment].api.powerplatform.com:443/powerautomate/automations/direct/workflows/[workflow-id]/triggers/manual/paths/invoke?...
-        msteams: true
-    on_pull_requests: false
-```
-{: data-file=".travis.yml"}
-
 ### Notification content
 
 MS Teams notifications display:
