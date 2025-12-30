@@ -851,8 +851,20 @@ Traditional webhooks (without the `msteams` flag) will receive the standard payl
 To encrypt the webhook URL using Travis CLI:
 
 ```bash
-travis encrypt "url: https://default[environment].api.powerplatform.com:443/powerautomate/automations/direct/workflows/[workflow-id]/triggers/manual/paths/invoke?..., msteams: true" --add notifications.webhooks.urls
+travis encrypt "https://default[environment].api.powerplatform.com:443/powerautomate/automations/direct/workflows/[workflow-id]/triggers/manual/paths/invoke?..." --add notifications.webhooks.urls
 ```
+
+Then update your configuration to reference the encrypted URL while keeping `msteams: true`:
+
+```yaml
+notifications:
+  webhooks:
+    urls:
+      url:
+        secure: SNguF/nJMFbUbQd1EiVtiN1Ic54WnqgnhcE+El2YhBFo/PzZF2m2rzjJ8...
+      msteams: true
+```
+{: data-file=".travis.yml"}
 
 ### Change notification frequency
 
